@@ -2,8 +2,66 @@
 ## Aplicación Compra tu Hogar (CTH)
 
 ### Diagrama entidad relación
-https://mermaid.ai/d/6f956716-4696-4587-ace3-f0e0fbd3c0c6
-<img width="6835" height="3232" alt="CTH-2026-04-16-210222" src="https://github.com/user-attachments/assets/56b4e03a-acf7-4aa3-951d-a8f2cb85b2eb" />
+
+```mermaid
+erDiagram
+	direction LR
+	USER {
+		int user_id PK
+		string username
+		string email
+		string password
+		enum profile_type
+	}
+
+	AGENCY {
+		int agency_id PK
+		string username
+		string email
+        string password
+		int admin_user_id FK
+	}
+
+	PROPERTY {
+		int property_id PK
+		enum property_type
+		float price
+		string address
+		string city
+		string province
+		float area_sq
+		int rooms
+		string description
+		bool available
+		int agency_id FK
+	}
+
+	FAVORITE {
+		int favorite_id PK
+		int user_id FK
+		int property_id FK
+		date saved_date
+        float saved_price
+		int score
+		string comment
+	}
+
+	PURCHASE {
+		int purchase_id PK
+		int user_id FK
+		int property_id FK
+		float purchase_price
+		date purchase_date
+	}
+
+	USER||--o{AGENCY:"lists"
+    USER||--o{PROPERTY:"searches"
+	USER||--o{FAVORITE:"saves"
+	USER||--o{PURCHASE:"makes"
+	AGENCY||--o{PROPERTY:"lists"
+	PROPERTY||--o{FAVORITE:"appears in"
+	PROPERTY||--o|PURCHASE:"acquired in"
+```
 
 Integrantes
 - Juan Hualampa
