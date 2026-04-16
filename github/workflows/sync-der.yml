@@ -1,0 +1,31 @@
+name: Sync Mermaid diagram to README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'DER.mmd'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject diagram into README
+        run: |
+          perl -i -0pe '
+            my $block = do { local $/; open(my $f, "<", "DER.mmd") or die; <$f> };
+            chomp $block;
+            s|<!-- mermaid-sync -->.*?<!-- /mermaid-sync -->|<!-- mermaid-sync -->\n```mermaid\n$block\n```\n<!-- /mermaid-sync -->|s;
+          ' profile/README.md
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || (git add profile/README.md && git commit -m "chore: sync DER.mmd into README" && git push)

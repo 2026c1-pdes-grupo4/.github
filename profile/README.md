@@ -3,65 +3,9 @@
 
 ### Diagrama entidad relación
 
-```mermaid
-erDiagram
-	direction LR
-	USER {
-		int user_id PK
-		string username
-		string email
-		string password
-		enum profile_type
-	}
-
-	AGENCY {
-		int agency_id PK
-		string username
-		string email
-        string password
-		int admin_user_id FK
-	}
-
-	PROPERTY {
-		int property_id PK
-		enum property_type
-		float price
-		string address
-		string city
-		string province
-		float area_sq
-		int rooms
-		string description
-		bool available
-		int agency_id FK
-	}
-
-	FAVORITE {
-		int favorite_id PK
-		int user_id FK
-		int property_id FK
-		date saved_date
-        float saved_price
-		int score
-		string comment
-	}
-
-	PURCHASE {
-		int purchase_id PK
-		int user_id FK
-		int property_id FK
-		float purchase_price
-		date purchase_date
-	}
-
-	USER||--o{AGENCY:"lists"
-    USER||--o{PROPERTY:"searches"
-	USER||--o{FAVORITE:"saves"
-	USER||--o{PURCHASE:"makes"
-	AGENCY||--o{PROPERTY:"lists"
-	PROPERTY||--o{FAVORITE:"appears in"
-	PROPERTY||--o|PURCHASE:"acquired in"
-```
+<!-- mermaid-sync -->
+block updated by CI: sync-der.yml
+<!-- /mermaid-sync -->
 
 Integrantes
 - Juan Hualampa
