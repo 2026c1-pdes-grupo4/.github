@@ -12,44 +12,29 @@ erDiagram
 		string username
 		string email
 		string password
-		enum profile_type
+		enum profile_type "buyer | agency | admin"
 	}
 
-	AGENCY {
-		int agency_id PK
-		string username
-		string email
-        string password
-        int admin_user_id FK
-    }
-
-    PROPERTY {
-        int property_id PK
-        enum property_type
-        float price
-        string address
-        string city
-        string province
-        float area_sq
-        int rooms
-        string description
-        bool available
-    }
-
-    AGENCY_PROPERTY {
-        int agency_property_id PK
-        int agency_id FK
-        int property_id FK
-        date listed_date
-        float listed_price
-    }
+	PROPERTY {
+		int property_id PK
+		enum property_type
+		float price
+		string address
+		string city
+		string province
+		float area_sq
+		int rooms
+		string description
+		bool available
+		int agency_id FK
+	}
 
 	FAVORITE {
 		int favorite_id PK
 		int user_id FK
 		int property_id FK
 		date saved_date
-        float saved_price
+		float saved_price
 		int score
 		string comment
 	}
@@ -57,20 +42,20 @@ erDiagram
 	PURCHASE {
 		int purchase_id PK
 		int user_id FK
-		int agency_property_id FK
+		int property_id FK
 		float purchase_price
 		date purchase_date
 	}
 
-    USER||--o{AGENCY:"lists"
-    USER||--o{PROPERTY:"searches"
-    USER||--o{FAVORITE:"saves"
-    USER||--o{PURCHASE:"makes"
-    AGENCY||--o{AGENCY_PROPERTY:"lists through"
-    PROPERTY||--o{AGENCY_PROPERTY:"appears in"
-    PROPERTY||--o{FAVORITE:"appears in"
-    PROPERTY||--o|PURCHASE:"acquired in"
-
+	USER||--o{PROPERTY:"searches (as buyer)"
+	USER||--o{FAVORITE:"saves (as buyer)"
+	USER||--o{PURCHASE:"makes (as buyer)"
+	USER||--o{PROPERTY:"lists (as agency)"
+	USER||--o{USER:"manages (as admin)"
+	USER||--o{FAVORITE:"views (as admin)"
+	USER||--o{PURCHASE:"views (as admin)"
+	PROPERTY||--o{FAVORITE:"appears in"
+	PROPERTY||--o|PURCHASE:"acquired in"
 
 ```
 <!-- /mermaid-sync -->
