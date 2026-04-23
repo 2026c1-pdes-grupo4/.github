@@ -40,12 +40,8 @@ erDiagram
 		date purchase_date
 	}
 
-	USER||--o{PROPERTY:"searches (as buyer)"
-	USER||--o{FAVORITE:"saves (as buyer)"
-	USER||--o{PURCHASE:"makes (as buyer)"
-	USER||--o{PROPERTY:"lists (as agency)"
-	USER||--o{USER:"manages (as admin)"
-	USER||--o{FAVORITE:"views (as admin)"
-	USER||--o{PURCHASE:"views (as admin)"
+	USER||--o{PROPERTY:"lists"
+	USER||--o{FAVORITE:"saves"
+	USER||--o{PURCHASE:"makes"
 	PROPERTY||--o{FAVORITE:"appears in"
 	PROPERTY||--o|PURCHASE:"acquired in"
