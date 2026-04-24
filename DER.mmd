@@ -5,7 +5,15 @@ erDiagram
 		string username
 		string email
 		string password
-		enum profile_type "buyer | agency | admin"
+		enum profile_type
+	}
+
+	AGENCY {
+		int agency_id PK
+		string username
+		string email
+        string password
+		int admin_user_id FK
 	}
 
 	PROPERTY {
@@ -49,9 +57,9 @@ erDiagram
 
 	USER||--o{AGENCY:"lists"
     USER||--o{PROPERTY:"searches"
-    USER||--o{FAVORITE:"saves"
-    USER||--o{PURCHASE:"makes"
+	USER||--o{FAVORITE:"saves"
+	USER||--o{PURCHASE:"makes"
     AGENCY||--o{AGENCY_PROPERTY:"lists through"
     PROPERTY||--o{AGENCY_PROPERTY:"appears in"
-    PROPERTY||--o{FAVORITE:"appears in"
-    PROPERTY||--o|PURCHASE:"acquired in"
+	PROPERTY||--o{FAVORITE:"appears in"
+	PROPERTY||--o|PURCHASE:"acquired in"
