@@ -5,7 +5,15 @@ erDiagram
 		string username
 		string email
 		string password
-		enum profile_type "buyer | agency | admin"
+		enum profile_type
+	}
+
+	AGENCY {
+		int agency_id PK
+		string username
+		string email
+        string password
+		int admin_user_id FK
 	}
 
 	PROPERTY {
@@ -19,8 +27,15 @@ erDiagram
 		int rooms
 		string description
 		bool available
-		int agency_id FK
 	}
+
+	AGENCY_PROPERTY {
+        int agency_property_id PK
+        int agency_id FK
+        int property_id FK
+        date listed_date
+        float listed_price
+    }
 
 	FAVORITE {
 		int favorite_id PK
@@ -35,13 +50,16 @@ erDiagram
 	PURCHASE {
 		int purchase_id PK
 		int user_id FK
-		int property_id FK
+		int agency_property_id FK
 		float purchase_price
 		date purchase_date
 	}
 
-	USER||--o{PROPERTY:"lists"
+	USER||--o{AGENCY:"lists"
+    USER||--o{AGENCY_PROPERTY:"searches"
 	USER||--o{FAVORITE:"saves"
 	USER||--o{PURCHASE:"makes"
-	PROPERTY||--o{FAVORITE:"appears in"
-	PROPERTY||--o|PURCHASE:"acquired in"
+    AGENCY||--o{AGENCY_PROPERTY:"lists through"
+    PROPERTY||--o{AGENCY_PROPERTY:"appears in"
+	AGENCY_PROPERTY||--o{FAVORITE:"appears in"
+	AGENCY_PROPERTY||--o|PURCHASE:"acquired in"
