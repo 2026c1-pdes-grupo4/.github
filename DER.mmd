@@ -56,10 +56,10 @@ erDiagram
 	}
 
 	USER||--o{AGENCY:"lists"
-    USER||--o{PROPERTY:"searches"
+    USER||--o{AGENCY_PROPERTY:"searches"
 	USER||--o{FAVORITE:"saves"
 	USER||--o{PURCHASE:"makes"
     AGENCY||--o{AGENCY_PROPERTY:"lists through"
     PROPERTY||--o{AGENCY_PROPERTY:"appears in"
-	PROPERTY||--o{FAVORITE:"appears in"
-	PROPERTY||--o|PURCHASE:"acquired in"
+	AGENCY_PROPERTY||--o{FAVORITE:"appears in"
+	AGENCY_PROPERTY||--o|PURCHASE:"acquired in"
