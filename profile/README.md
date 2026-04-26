@@ -29,7 +29,6 @@ erDiagram
 	PROPERTY {
 		int property_id PK
 		enum property_type
-		float price
 		string address
 		string city
 		string province
@@ -37,6 +36,10 @@ erDiagram
 		int rooms
 		string description
 		bool available
+		string circunscripcion
+		string seccion
+		string manzana
+		string parcela
 	}
 
 	AGENCY_PROPERTY {
@@ -46,6 +49,12 @@ erDiagram
         date listed_date
         float listed_price
     }
+
+	PICTURE {
+		int picture_id PK
+		int agency_property_id FK
+		string url
+	}
 
 	FAVORITE {
 		int favorite_id PK
@@ -73,6 +82,7 @@ erDiagram
     PROPERTY||--o{AGENCY_PROPERTY:"appears in"
 	AGENCY_PROPERTY||--o{FAVORITE:"appears in"
 	AGENCY_PROPERTY||--o|PURCHASE:"acquired in"
+	AGENCY_PROPERTY||--o{PICTURE:"has"
 
 ```
 <!-- /mermaid-sync -->
