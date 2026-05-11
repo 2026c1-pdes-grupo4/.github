@@ -49,7 +49,7 @@ erDiagram
 	FAVORITE {
 		int favorite_id PK
 		int user_id FK
-		int property_id FK
+		int agency_property_id FK
 		date saved_date
 		float saved_price
 		int score
@@ -65,11 +65,11 @@ erDiagram
 	}
 
 	USER||--o{AGENCY:"lists"
-    USER||--o{AGENCY_PROPERTY:"searches"
+	USER||--o{AGENCY_PROPERTY:"searches"
 	USER||--o{FAVORITE:"saves"
 	USER||--o{PURCHASE:"makes"
-    AGENCY||--o{AGENCY_PROPERTY:"lists through"
-    PROPERTY||--o{AGENCY_PROPERTY:"appears in"
+	AGENCY||--o{AGENCY_PROPERTY:"lists through"
+	PROPERTY||--o{AGENCY_PROPERTY:"appears in"
 	AGENCY_PROPERTY||--o{FAVORITE:"appears in"
 	AGENCY_PROPERTY||--o|PURCHASE:"acquired in"
 	AGENCY_PROPERTY||--o{PICTURE:"has"
